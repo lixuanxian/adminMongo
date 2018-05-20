@@ -1,1 +1,12 @@
-{}
+{
+  "connections": {
+    "localhost": {
+      "connection_string": "mongodb://localhost",
+      "connection_options": {}
+    },
+    "localhost27027": {
+      "connection_string": "mongodb://kineviz:kineviz@localhost:27027/?authSource=admin",
+      "connection_options": {}
+    }
+  }
+}

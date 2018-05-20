@@ -114,11 +114,14 @@ router.post('/database/:conn/:db/db_restore', function (req, res, next){
     var conn_uri = MongoURI.parse(connection_list[req.params.conn].connString);
     var db_name = req.params.db;
 
-    var uri = connection_list['Local'].connString;
+    var uri = connection_list[req.params.conn].connString;
 
     // add DB to URI if not present
     if(!conn_uri.database){
-        uri = uri + '/' + db_name;
+        //replace mongodb://UserName:Password@localhost:27027/?authSource=admin
+        //to mongodb://UserName:Password@localhost:27027/db_name?authSource=admin
+        uri = uri.replace(/(\:\d+)(?:\/)/,"$1/"+db_name);
+        // uri = uri + '/' + db_name;
     }
 
     // kick off the restore
